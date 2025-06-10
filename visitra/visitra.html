@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2dHZJ-MronndWXuB7AqThdJ3oUS3fWTw&callback=initMap" async defer></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisiTra</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+   <script>
+      document.addEventListener("DOMContentLoaded", function() {
+
+          var flipButtons = document.querySelectorAll(".btn");
+          var flipButtons1 = document.querySelectorAll(".btn1");
+
+         
+          flipButtons.forEach(function(button) {
+              button.addEventListener("click", function() {
+
+                  var flipCardInner = this.closest(".flip-card").querySelector(".flip-card-inner");
+
+
+                  flipCardInner.style.transform = getComputedStyle(flipCardInner).transform === "matrix(1, 0, 0, 1, 0, 0)" ? "rotateY(180deg)" : "rotateY(0)";
+              });
+          });
+
+
+          flipButtons1.forEach(function(button) {
+              button.addEventListener("click", function() {
+
+                  var flipCardBack = this.closest(".flip-card").querySelector(".flip-card-inner");
+
+
+                  flipCardBack.style.transform = getComputedStyle(flipCardBack).transform === "matrix(1, 0, 0, 1, 0, 0)" ? "rotateY(180deg)" : "rotateY(0)";
+              });
+          });
+      });
+  </script> 
+
+<style>
+  .body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+    .event-image {
+    width: 120px; 
+    height: 120px; 
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+    .event-title {
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px; 
+    font-weight: bold;
+}
+
+.btn-ocjena{
+    margin-top: 1rem;
+    display: inline-block;
+    padding:.8rem 3rem;
+    font-size: 1.7rem;
+    color:#fff;
+    background:var(--orange);
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+
+.image-square {
+    flex: 1;
+    height: 300px; 
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease-in-out; 
+    margin-right: 3px; 
+    margin-left: 3px;
+    border-radius: 0.5rem;
+}
+
+.image-square img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.image-square:hover {
+    transform: scale(1.1); 
+}
+.image-square p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white; 
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-size: 24px; 
+    font-weight: bold; 
+    text-shadow: 3px 3px 3px black; 
+}
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1000;
+}
+
+.popup {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.form-row label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.form-group {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.form-group:last-child {
+    margin-right: 0;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #222;
+    border-radius: 5%;
+}
+
+.form-group1 input[type="submit"] {
+    background-color: #F79F1F;
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 5%;
+}
+.button-zatvori{
+    background-color: #eee;
+    color: #222;
+    cursor: pointer;
+    width: 85%;
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 5%;
+    margin-top: 5px;
+}
+.Nez{
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 4rem;
+}
+.Nezaint{
+  background-color: orange;
+    color: #eee;
+    cursor: pointer;
+    width: 41.3%;
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    margin-top: 4rem;
+    font-weight: bold;
+    font-size: 1.7rem;
+    
+}
+.HTravnik{
+  background-color: orange;
+    color: #eee;
+    cursor: pointer;
+    width: 20%;
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    margin-top: 4rem;
+    font-weight: bold;
+    font-size: 1.7rem;
+    margin: 0 1rem;
+}
+.HVlasic{
+  background-color: orange;
+    color: #eee;
+    cursor: pointer;
+    width: 20%;
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    margin-top: 4rem;
+    font-weight: bold;
+    font-size: 1.7rem;
+    margin: 0 1rem;
+   
+}
+.Hoteli{
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 4rem;
+}
+</style>
+<style>
+  .modal1 {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5);
+z-index: 1000;
+}
+
+.modal1-content {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: #fff;
+width: 40%; /* Adjust as needed */
+max-width: 90%;
+height: 50%; /* Adjust as needed */
+max-height: 80%;
+overflow: hidden;
+display: flex;
+flex-direction: column;
+border-radius: 0.5rem;
+}
+
+#closeModalBtn {
+position: absolute;
+top: 10px;
+right: 10px;
+font-size: 20px;
+cursor: pointer;
+z-index: 1100; /* Set a higher z-index */
+color: #379683;
+}
+</style>
+
+
+<style>
+  .modal6 {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5);
+z-index: 1000;
+}
+
+.modal6-content {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: #fff;
+width: 40%; /* Adjust as needed */
+max-width: 90%;
+height: 50%; /* Adjust as needed */
+max-height: 80%;
+overflow: hidden;
+display: flex;
+flex-direction: column;
+border-radius: 0.5rem;
+}
+
+#closeModalBtn {
+position: absolute;
+top: 10px;
+right: 10px;
+font-size: 20px;
+cursor: pointer;
+z-index: 1100; 
+color: #379683;
+}
+.logo {
+  max-width: 90px;
+    position: relative; 
+    
+}
+.logo1{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+.logo2{
+  width:100%;
+  height: 70%;
+}
+</style>
+<link rel="icon" href="images/it.reboot.png" type="image/x-icon">
+
+</head>
+<body>
+    
+
+
+<header class="header">
+  <a href="visitra.html">
+  <div class="logo1"> 
+     <img src="images/it.reboot.png" alt="Logo" class="logo" style="margin-bottom: 3%;max-height: 80px;">
+     <img src="images/VisiTra.png" alt="Logo" class="logo2" style="max-width: 200px;margin-bottom:5%">
+  </div>
+</a>
+   
+  
+
+
+  <div id="prevod" class="clicked" onclick="prikaziDiv()">
+    <img id="translateImage" src="images/translate1.png" alt="Translate Image">
+    <img id="secondImage" src="images/translate2.png" alt="Second Image">
+    
+</div>
+    <div id="google_translate_element" class="transvertit">
+    <!-- Vaš sadržaj div-a ovdje -->
+</div>
+
+
+    <div class="icons">
+      
+        <div class="fas fa-search" id="search-btn"></div>
+        <div class="fas fa-moon" id="theme-btn"></div>
+        <div class="fa fa-calendar" id="theme-btn"  button onclick="openModal()"></button></div> 
+        
+        <div class="fas fa-user" id="login-btn"></div>
+        <div class="fas fa-bars" id="menu-btn"></div>
+    </div>
+
+    <nav class="navbar">
+        <a href="#home">Počenta</a>
+        <a href="#packages">Sta želite posjetiti</a>
+        <a href="#review">Poznati događaji</a>
+        <a href="#contact">Kontakt</a>
+        
+    </nav>
+
+    <form action="php\login.php" class="login-form" method="post">
+
+      <div class="inputBox">
+          <span>Korisničko ime</span>
+          <input type="text" placeholder="Unesi korisničko ime " name="username">
+      </div>
+
+      <div class="inputBox">
+          <span>Lozinka</span>
+          <input type="password" placeholder="Unesi lozinku*" name="password">
+      </div>
+
+      <input type="submit" class="btn" value="Prijava">
+
+  </form>
+
+
+</header>
+<div id="myModal" class="modal2">
+    <div class="modal2-content">
+        <span class="close2" onclick="closeModal()">&times;</span>
+        <div id="calendar"></div>
+    </div>
+</div>
+
+
+<section class="home" id="home">
+
+    <div class="image" data-aos="fade-down">
+        <img src="images/slikamejebala.png" alt="">
+    </div>
+
+    <div class="content" data-aos="fade-up">
+      <h3>Dobro Došli</h3>
+      <p>Travnik je smješten u srcu Bosne, okružen pitoresknim planinama
+           i dolinama, što ga čini savršenim mjestom za istraživanje
+            prirodne ljepote ove regije. Bez obzira da li ste ljubitelj
+             povijesti, arhitekture, gastronomije ili avanturista koji 
+             traži netaknutu prirodu, Travnik ima nešto za svakoga.
+             Turistički potencijal grada uključuje brojne znamenitosti, kao što su džamije, crkve, tvrđave te prirodne ljepote okolnog kraja.</p>
+             <button class="btn" onclick="openPopup()"> Započni avanturu</button>
+             
+  </div>
+  <div class="overlay" id="popupOverlay">
+      <div class="popup">
+          <h2>Unesite podatke</h2>
+          <form id="popupForm">
+              <div class="form-row">
+              <div class="form-group">
+                  <label for="label1">Odakle dolazite:</label>
+                  <input type="text" id="label1" name="label1" required autocomplete="off">
+              </div>
+              <div class="form-group">
+                  <label for="label2">Od kada ste tu:</label>
+                  <input type="date" id="label2" name="label2" required autocomplete="off">
+              </div>
+              </div>
+              <div class="form-row">
+              <div class="form-group">
+                  <label for="label3">Sta vas interesuje:</label>
+                  <input type="text" id="label3" name="label3" required autocomplete="off">
+              </div>
+              <div class="form-group">
+                  <label for="label4">Do kada ste tu:</label>
+                  <input type="date" id="label4" name="label4" required autocomplete="off">
+              </div>
+              </div>
+              <div class="form-row">
+                  <div class="form-group-checkbox">
+                      <label for="checkbox1">Sami ste:</label>
+                      <input type="checkbox" id="checkbox1" name="checkbox1">
+                  </div>
+                  <div class="form-group-checkbox">
+                      <label for="checkbox2">Sa grupom ste:</label>
+                      <input type="checkbox" id="checkbox2" name="checkbox2">
+                  </div>
+              </div>
+              <div class="form-group1">
+                  <input type="submit" value="Submit" onclick="showPaketi()">
+              </div>
+          </form>
+          <button class="button-zatvori" onclick="closePopup()">Zatvori Formu</button>
+      </div>
+  </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+  <section id="paketi" style="padding: 2rem 1%;">
+    <br> <br> <br>
+    <h1 class="heading"> Odaberite svoj  <span> Paket</span> </h1>
+    
+    <div class="body">
+        <div class="image-square">
+            <img src="images/porodica.jpg" alt="Slika 1" onclick="openPopupPaket1()">
+            <p>Porodicni paket</p>
+        </div>
+        <div class="image-square">
+            <img src="images/sport.jpg" alt="Slika 2" onclick="openPopupPaket2()">
+            <p>Sportski paket</p>
+        </div>
+        <div class="image-square">
+            <img src="images/asim.jpg" alt="Slika 3" onclick="openPopupPaket3()">
+            <p>Kulturno obrazovni paket</p>
+        </div>
+        <div class="image-square">
+            <img src="images/zima.jpg" alt="Slika 4" onclick="openPopupPaket4()">
+            <p>Zimski paket</p>
+        </div>
+    </div>
+    <div class="Nez"><button id="Nisam_zainteresovan" onclick="kartce()" class="Nezaint">Nisam Zainteresovan/a</button>
+    </div>
+    <div class="Hoteli">   
+    <button id="Nisam_zainteresovan" onclick="openModal1()" class="HTravnik">Bokirajte Hotel u Travniku</button>
+    <button id="Nisam_zainteresovan" onclick="openModal6()" class="HVlasic">Bokirajte Hotel na Vlašiću</button>
+  </div>
+
+    </section>
+    
+    <div class="overlay" id="popupOverlay-paket1">
+        <div class="popup">
+            <h1>Porodicni paket</h1>
+            <p style="font-size: small; text-align: left;"> Dobrodošli u Travnik, jedan od najljepših gradova Bosne i Hercegovine!<br>
+                Ovaj šarmantni grad nudi raznolike mogućnosti za porodična iskustva, bilo da uživate u gastronomiji,<br>
+                istražujete kulturno nasljeđe ili se opuštate u prirodnom okruženju.<br>
+                Evo nekoliko prijedloga za stvari koje možete raditi sa porodicom u Travniku:<br>
+                <h2 style="text-align: left;">Okusi Bosanske Kuhinje</h2>
+                <p style="font-size: small; text-align: left;">Posjetite Restoran Plava Voda i uronite u mirnu atmosferu uz rijeku, gdje ćete moći kušati raznovrsna jela tradicionalne bosanske kuhinje.<br>
+                Za ljubitelje kafe, preporučujemo Kafić Bašča s predivnim pogledom na tvrđavu Travnik.<br>
+                Ako tražite prostor za obiteljske obroke, Restoran Garden nudi udobnu terasu s pogledom na Gradski park.</p>
+                <h2 style="text-align: left;">Aktivnosti za Odmor i Istraživanje</h2><br>
+                <p style="font-size: small; text-align: left;">
+                <h3 style="text-align: left;">Travnička Tvrđava:</h3><p style="font-size: small; text-align: left;">Otkrijte povijesnu tvrđavu s prekrasnim pogledom na grad,
+                savršeno mjesto za porodične fotografije.</p><br>
+                <h3 style="text-align: left;">Gradski Park:</h3><p style="font-size: small; text-align: left;">Provedite opuštajući dan šetajući Gradskim parkom. Djeca će uživati u igralištu, 
+                a cijela porodica može odmoriti na zelenim površinama.</p><br>
+                <h3 style="text-align: left;">Jezero Plava Voda:</h3><p style="font-size: small; text-align: left;">Ako želite prirodnu avanturu, posjetite jezero Plava Voda. Piknik, 
+                vožnja čamcem ili šetnja uz obalu pružit će vam predivno iskustvo.</p><br>
+                <h3 style="text-align: left;">Muzej Travnik:</h3><p style="font-size: small; text-align: left;">Upoznajte se s bogatom historijom grada kroz posjetu muzeju. Interaktivni izložbeni prostori posebno su zanimljivi za djecu.</p></p></p>
+                
+                <div class="image-container-paket">
+                <img src="images\stari3.jpg" alt="Slika 1" style="height: 160px; width: 160px;">
+                <img src="images\muzej.jpg" alt="Slika 2" style="height: 160px; width: 160px;">
+                <img src="images\plava.jpg" alt="Slika 1" style="height: 160px; width: 160px;">
+                <!-- Dodajte više slika ako je potrebno -->
+            </div>
+            <div class="form-group1">
+                <input type="submit" value="Izaberi ovaj paket" onclick="showMapa('https:\/\/www.google.com\/maps\/d\/embed?mid=1NRQ7ECWKxYBowEprtnb_yM5Qjo8n0VE&ehbc=2E312F')" id="paket1">
+              </div>
+            <button class="button-zatvori" onclick="closePopupPaket1()" >Zatvori</button>
+        </div>
+    </div>
+    <div class="overlay" id="popupOverlay-paket2">
+        <div class="popup">
+            <h1>Sportski paket</h1>
+            <p style="font-size: small; text-align: left;"> Dobrodošli u Travnik, grad koji nudi raznovrsne sportske aktivnosti za sve ljubitelje sporta!<br>
+                Bez obzira jeste li zaljubljenik u aktivnosti na otvorenom ili preferirate sportske dvorane, Travnik ima mnogo toga za ponuditi.<br>
+                Evo nekoliko prijedloga za sportske aktivnosti koje možete uživati u ovom prekrasnom gradu:<br><br>
+                <h2 style="text-align: left;">Planinarenje na Vlašiću</h2>
+                <p style="font-size: small; text-align: left;">Ako volite biciklizam, istražite biciklističke staze na Vlašiću.<br>
+                Ovo planinsko područje pruža prekrasne prizore i izazovne staze za sve nivoe vozača.<br>
+                <h2 style="text-align: left;">Sportski Centri i Teretane</h2>
+                <p style="font-size: small; text-align: left;">Posjetite sportski centar s modernim sadržajem kao što su teretana, bazen i teniski tereni.<br>
+                Idealno mjesto za cijelu porodicu.Za one koji preferiraju vježbanje u zatvorenom,<br>
+                fitness centar MyWay nudi razne grupne treninge i individualne programe.</p>
+                <h2 style="text-align: left;">Košarka na Gradskom Košarkaškom Terenu:</h2><p style="font-size: small; text-align: left;">Okupite porodicu za partiju košarke na gradskom košarkaškom terenu.<br>
+                Ovo je sjajan način za aktivno provođenje vremena zajedno.</p><br>
+        
+                <div class="image-container-paket">
+                <img src="images\majvej.jpg" alt="Slika 1" style="height: 160px; width: 160px;">
+                <img src="images\vlasic.jpg" alt="Slika 2" style="height: 160px; width: 160px;">
+                <img src="images\halakteorema.jpg" alt="Slika 1" style="height: 160px; width: 160px;">
+                <!-- Dodajte više slika ako je potrebno -->
+            </div>
+            <div class="form-group1">
+                <input type="submit" value="Izaberi ovaj paket" onclick="showMapa('https:\/\/www.google.com\/maps\/d\/embed?mid=1OdT2mvrnV2H6SEzP7YdpXABZ2VeYLBU&ehbc=2E312F')" id="paket2">
+            </div>
+            <button class="button-zatvori" onclick="closePopupPaket2()">Zatvori</button>
+        </div>
+    </div>
+    <div class="overlay" id="popupOverlay-paket3">
+        <div class="popup">
+            <h1>Kulturno obrazovni</h1>
+            <p style="font-size: small; text-align: left;">Dobrodošli u Travnik, grad bogate kulturne baštine i obrazovnih doživljaja!<br>
+                Bez obzira na vaše interese, ovaj grad ima mnogo toga za ponuditi kada su u pitanju kulturno-obrazovne aktivnosti.<br>
+                Evo nekoliko prijedloga kako možete obogatiti svoj posjet Travniku:<br><br>
+                <h2 style="text-align: left;">Kulturno Povijesna Putovanja</h2>
+                <h3 style="text-align: left;">Posjetite Tvrdavu Travnik:</h3>
+                <p style="font-size: small; text-align: left;">Otkrijte fascinantnu povijest grada istraživanjem tvrđave Travnik. Pogled s tvrđave pruža nevjerojatan pejzaž i uvid u prošlost ovog grada.</p>
+                <h3 style="text-align: left;">Muzeji i Galerije:</h3>
+                <p style="font-size: small; text-align: left;"> Posjetite Muzej Grada Travnik i druge kulturne institucije koje čuvaju vrijedne eksponate i priče o bogatoj prošlosti ovog područja.</p>
+                <h2 style="text-align: left;">Kulturne Manifestacije</h2>
+                <h3 style="text-align: left;">Festivalski Doživljaji:</h3>
+                <p style="font-size: small; text-align: left;">Ako posjećujete Travnik tijekom festivala, imat ćete priliku doživjeti bogat kulturni program, bilo da je riječ o filmskom, književnom ili glazbenom festivalu.</p>
+                <h3 style="text-align: left;">Tradicijski Događaji:</h3>
+                <p style="font-size: small; text-align: left;">Pratite tradicionalne kulturne događaje poput manifestacija, koncerata i izložbi koje oživljavaju autentičnost ovog grada.</p>
+                <h2 style="text-align: left;">Umjetničke Izvedbe</h2>
+                <h3 style="text-align: left;">Teatar i Kazalište:</h3>
+                <p style="font-size: small; text-align: left;">Ako volite kazališne predstave, provjerite raspored lokalnih teatarskih izvedbi. Ovo je sjajan način da doživite umjetnički izraz grada.</p>
+                </p></p></p>
+                
+                <div class="image-container-paket">
+                <img src="images\kulaodstakla.jpg" alt="Slika 1" style="height: 160px; width: 160px;">
+                <img src="images\konji.jpg" alt="Slika 2" style="height: 160px; width: 160px;">
+                <img src="images\muzej.jpg" alt="Slika 1" style="height: 160px; width: 160px;">
+                <!-- Dodajte više slika ako je potrebno -->
+            </div>
+            <div class="form-group1">
+                <input type="submit" value="Izaberi ovaj paket" onclick="showMapa('https:\/www.google.com\/maps\/d\/embed?mid=1b0N3GTYA9xkUNFctDhRGupxoTa_GnQo&ehbc=2E312F')" id="paket3">
+            </div>
+
+            <button class="button-zatvori" onclick="closePopupPaket3()">Zatvori</button>
+        </div>
+    </div>
+    <div class="overlay" id="popupOverlay-paket4">
+        <div class="popup">
+            <h1>Zimski paket</h1>
+            <p style="font-size: small; text-align: left;"> Dobrodošli u zimsku čaroliju grada Travnik! Ovaj grad nudi raznovrsne aktivnosti koje možete uživati tokom hladnih zimskih mjeseci.<br>
+                Bez obzira jeste li ljubitelj zimskih sportova, kulinarskih užitaka ili kulturnih doživljaja, Travnik ima nešto za svakoga.<br>
+                Evo nekoliko prijedloga za zimske aktivnosti u ovom prekrasnom gradu:<br>
+                <h2 style="text-align: left;">Zimske Sportske Radosti</h2>
+                <p style="font-size: small; text-align: left;">
+                <h3 style="text-align: left;">Skiing na Vlašiću:</h3><p style="font-size: small; text-align: left;"> Posjetite planinu Vlašić, gdje ćete pronaći odlične staze za skijanje.<br>
+                Bez obzira jeste li početnik ili iskusni skijaš, ovo je savršeno mjesto za zimske sportske radosti.</p>
+                <h3 style="text-align: left;">Klizanje na Ledu:</h3><p style="font-size: small; text-align: left;"> Gradski klizalište pruža odličnu zabavu za sve generacije.<br>
+                Unajmite klizaljke i klizajte se uz ritam omiljene glazbe.</p>
+                <h2 style="text-align: left;">Zimski Praznici i Trgovački Bazar</h2>
+                <h3 style="text-align: left;">Božićni Bazar:</h3>
+                <p style="font-size: small; text-align: left;">Posjetite Božićni bazar gdje možete pronaći prekrasne ručno izrađene ukrase, poklone i tradicionalne poslastice.<br>
+                Atmosfera će vas odmah staviti u praznično raspoloženje.</p>
+                <h2 style="text-align: left;">Topli Napici i Gurmanski Doživljaji</h2>
+                <h3 style="text-align: left;">Posjetite Tradicionalne Kafiće:</h3>
+                <p style="font-size: small; text-align: left;">Provjerite tradicionalne kafiće gdje možete uživati u toplim napicima poput turske kave ili domaće kuhane rakije.</p>
+                <h3 style="text-align: left;">Restorani s Zimskim Delicijama:</h3>
+                <p style="font-size: small; text-align: left;">Isprobajte lokalne restorane koji nude specijalitete prilagođene hladnom vremenu.<br>
+                Čorbe, gulaši i tradicionalni kolači su nezaobilazni.</p>
+                </p>
+                
+                <div class="image-container-paket">
+                <img src="images\zima.jpg" alt="Slika 1" style="height: 160px; width: 160px;">
+                <img src="images\skijanje.jpg" alt="Slika 2" style="height: 160px; width: 160px;">
+                <img src="images\sankanje.jpg" alt="Slika 1" style="height: 160px; width: 160px;">
+                <!-- Dodajte više slika ako je potrebno -->
+            </div>
+            <div class="form-group1">
+                <input type="submit" value="Izaberi ovaj paket" onclick="showMapa('https:\/\/www.google.com\/maps\/d\/embed?mid=1yTCMm9HZnhOhiuNrlA4W5xH855rvlb4&ehbc=2E312F')" id="paket4">
+            </div>
+            <button class="button-zatvori" onclick="closePopupPaket4()">Zatvori</button>
+        </div>
+    </div>
+    <br><br>
+    <br><br><br><br><br>
+    <br><br><br><br><br>
+
+
+
+
+
+
+
+</section>
+<!--Travnik booking-->
+<div id="myModal1" class="modal1">
+  <div class="modal1-content">
+    <span id="closeModalBtn" onclick="closeModal1()">&times;</span>
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"> 
+          <img src="images/Lipa.jpg" alt="">
+          <div class="img_overlay">
+            <p>Hotel Lipa</p>
+            <div class="zvezda">
+              <img src="images/star-filled-yellow.png">
+              <img src="images/star-filled-yellow.png">
+              <img src="images/star-filled-yellow.png">
+              <img src="images/star-filled-yellow.png">
+            </div>
+            <h3>Moderni Hotel u Srcu Travnika</h3>
+            <a href="https://www.booking.com/hotel/ba/lipa.en-gb.html?label=metagha-link-LUBA-hotel-5056220_dev-desktop_los-1_bw-0_dow-Sunday_defdate-1_room-0_gstadt-2_rateid-dg_aud-0_gacid-6623578704_mcid-10_ppa-0_clrid-0_ad-1_gstkid-0_checkin-2023-11-12_ppt-GLmd_lp-2070_r-17321893035891092165-Share-gFp24c%401699798466&sid=6092ee0cc6186565fafa8d7f04e65066&aid=356938&ucfs=1&arphpl=1&checkin=2023-11-12&checkout=2023-11-13&dest_id=-98524&dest_type=city&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=1&hapos=1&sr_order=popularity&srpvid=9bde64250c260271&srepoch=1699798481&all_sr_blocks=936748404_365828600_2_1_0&highlighted_blocks=936748404_365828600_2_1_0&matching_block_id=936748404_365828600_2_1_0&sr_pri_blocks=936748404_365828600_2_1_0__9000&from=searchresults#hotelTmpl" target="_blank">Book Now</a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <img src="images/vezir1.jpg" alt="">
+          <div class="img_overlay">
+            <p>Hotel Vezir Palace</p>
+            <div class="zvezda">
+              <img src="images/star-filled-yellow.png">
+              <img src="images/star-filled-yellow.png">
+              <img src="images/star-filled-yellow.png">
+              <img src="images/star-filled-yellow.png">
+            </div>
+            <h3>Moderan Hotel sa Nevjerovatnim Pogledom</h3>
+            <a href="https://www.booking.com/hotel/ba/vezir-palace.en-gb.html?label=metagha-link-LUBA-hotel-5056220_dev-desktop_los-1_bw-0_dow-Sunday_defdate-1_room-0_gstadt-2_rateid-dg_aud-0_gacid-6623578704_mcid-10_ppa-0_clrid-0_ad-1_gstkid-0_checkin-2023-11-12_ppt-GLmd_lp-2070_r-17321893035891092165-Share-gFp24c%401699798466&sid=6092ee0cc6186565fafa8d7f04e65066&aid=356938&ucfs=1&arphpl=1&checkin=2023-11-12&checkout=2023-11-13&dest_id=-98524&dest_type=city&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=2&hapos=2&sr_order=popularity&srpvid=9bde64250c260271&srepoch=1699798502&all_sr_blocks=505622009_382316697_0_41_0&highlighted_blocks=505622009_382316697_0_41_0&matching_block_id=505622009_382316697_0_41_0&sr_pri_blocks=505622009_382316697_0_41_0__6156&from_sustainable_property_sr=1&from=searchresults#hotelTmpl" target="_blank">Book Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 1,
+    spaceBetween: 0,
+    slidesPerGroup: 1,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+</script>
+
+
+<!--Vlasic booking-->>
+<div id="myModal6" class="modal6">
+  <div class="modal6-content">
+    <span id="closeModalBtn" onclick="closeModal6()">&times;</span>
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <img src="images/HVlasic1.jpg" alt="">
+        <div class="img_overlay">
+          <p> Hotel Blanca Resort & Spa</p>
+          <div class="zvezda">
+            <img src="images/star-filled-yellow.png">
+            <img src="images/star-filled-yellow.png">
+            <img src="images/star-filled-yellow.png">
+            <img src="images/star-filled-yellow.png">
+          </div>
+          <h3>Hotel na Vlasicu</h3>
+          <a href="#">Book now</a>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="images/HVlasic2.jpg" alt="">
+        <div class="img_overlay">
+          <p> Hotel Villa Ugar Vlašić</p>
+          <div class="zvezda">
+            <img src="images/star-filled-yellow.png">
+            <img src="images/star-filled-yellow.png">
+            <img src="images/star-filled-yellow.png">
+          </div>
+          <h3>Hotel na Vlasicu</h3>
+          <a href="#">Book now</a>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="images/HVlasic3.jpg" alt="">
+        <div class="img_overlay">
+          <p> Hotel Sunce Vlašić</p>
+          <div class="zvezda">
+            <img src="images/star-filled-yellow.png">
+            <img src="images/star-filled-yellow.png">
+            <img src="images/star-filled-yellow.png">
+            <img src="images/star-filled-yellow.png">
+          </div>
+          <h3>Hotel na Vlasicu</h3>
+          <a href="#">Book now</a>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="images/HVlasic4.jpg" alt="">
+        <div class="img_overlay">
+          <p>  Hotel Pahuljica</p>
+          <div class="zvezda">
+            <img src="images/star-filled-yellow.png">
+            <img src="images/star-filled-yellow.png">
+            <img src="images/star-filled-yellow.png">
+            <img src="images/star-filled-yellow.png">
+          </div>
+          <h3>Hotel na Vlasicu</h3>
+          <a href="#">Book now</a>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="images/HVlasic5.jpg" alt="">
+        <div class="img_overlay">
+          <p> Hotel Pahuljica</p>
+          <div class="zvezda">
+            <img src="images/star-filled-yellow.png">
+            <img src="images/star-filled-yellow.png">
+            <img src="images/star-filled-yellow.png">
+            <img src="images/star-filled-yellow.png">
+          </div>
+          <h3>Hotel na Vlasicu</h3>
+          <a href="#">Book now</a>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="images/HVlasic6.jpg" alt="">
+        <div class="img_overlay">
+          <p> Hotel Central Vlasic</p>
+          <div class="zvezda">
+            <img src="images/star-filled-yellow.png">
+            <img src="images/star-filled-yellow.png">
+            <img src="images/star-filled-yellow.png">
+            <img src="images/star-filled-yellow.png">
+          </div>
+          <h3>Hotel na Vlasicu</h3>
+          <a href="#">Book now</a>
+        </div>
+      </div>
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+  </div>
+  </div>
+</div>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<script>
+  var swiper1 = new Swiper(".mySwiper", {
+    slidesPerView: 1,
+    spaceBetween: 0,
+    slidesPerGroup: 1,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+</script>
+
+
+
+<section class="packages" id="packages">
+    
+<br> <br><br>
+    <h1 class="heading"> Mi vam <span>Predlazemo</span> </h1>
+
+    <div class="box-container">
+
+        <div class="box" data-aos="fade-up">
+            <div class="image">
+                <img src="images/restorani.jpg" alt="">
+                <h3> <i class="fas fa-map-marker-alt"></i> Travnik </h3>
+            </div>
+            <div class="content">
+                <div class="price"> Restorani<span></span> </div>
+                <p> Travnik, kao dio bogate bosanske kulinarske tradicije, nudi raznovrsnu hranu koja će zadovoljiti svačije ukuse.
+                     raznolike restorane s nevjerojatnom hranom.
+                    također pronaći raznovrsne voće i povrće koje se često koristi u pripremi tradicionalnih jela.</p>
+                <button onclick="showCards(1)" class="btn"><a href="#cardContainer1"
+                  style="text-decoration: none; color: #eee;">Pogledaj</a></button>
+                
+            </div>
+        </div>
+
+        <div class="box" data-aos="fade-up">
+            <div class="image">
+                <img src="images/vjera.jpg" alt="">
+                <h3> <i class="fas fa-map-marker-alt"></i> Travnik </h3>
+            </div>
+            <div class="content">
+                <div class="price"> Vjerske ustanove <span></span> </div>
+                <p>Travnik, grad smješten u srcu Bosne i Hercegovine, bogat je vjerskom raznolikošću koja odražava njegovu bogatu kulturnu baštinu i povijest. U ovom tekstu ćemo istražiti glavne vjerske ustanove koje oblikuju duhovni pejzaž ovog grada.</p>
+                <button onclick="showCards(2)" class="btn"><a href="#cardContainer2"
+                  style="text-decoration: none; color: #eee;">Pogledaj</a></button>
+            </div>
+        </div>
+
+        <div class="box" data-aos="fade-up">
+            <div class="image">
+                <img src="images/karabaja.jpg" alt="">
+                <h3> <i class="fas fa-map-marker-alt"></i>Travnik</h3>
+            </div>
+            <div class="content">
+                <div class="price">Kultura i Znamenitosti<span></span> </div>
+                <p>Popularne znamenitosti u Travniku se moraju posjetiti. Uvjerite se u kulturu, tradiciju i 
+                    historiju vezirskog grada smještenog u srcu Bosne.Kultura i znamenitosti grada Travnik u Bosni i Hercegovini bogate su i raznolike, 
+                    odražavajući njegovu dugu povijest i multietničku prirodu. </p>
+                    <button onclick="showCards(3)" class="btn"><a href="#cardContainer3"
+                      style="text-decoration: none; color: #eee;">Pogledaj</a></button>
+            </div>
+        </div>
+
+        <div class="box" data-aos="fade-up">
+            <div class="image">
+                <img src="images/fara.jpg" alt="">
+                <h3> <i class="fas fa-map-marker-alt"></i>Travnik ,Vlasic </h3>
+            </div>
+            <div class="content">
+                <div class="price">Sportsko Rekreacioni centri<span></span> </div>
+                <p>
+                    Sportsko-rekreativne aktivnosti imaju ključnu 
+                    ulogu u očuvanju fizičkog zdravlja i psihološkog 
+                    blagostanja.Osim što doprinose očuvanju kondicije,poboljšavaju i socijalizaciju, 
+                       kao i stvaranje prijateljstava i poboljšanje mentalnog zdravlja.
+                    </p>
+                    <button onclick="showCards(4)" class="btn"><a href="#cardContainer4"
+                      style="text-decoration: none; color: #eee;">Pogledaj</a></button>
+            </div>
+        </div>
+
+        
+            
+        </div>
+
+        
+
+    </div>
+    
+        
+
+
+</section>
+
+<script>
+
+
+
+  
+
+  const paketi = document.getElementById(`paketi`);
+  paketi.style.display = 'none';
+  const kartice = document.getElementById(`packages`);
+  kartice.style.display = 'none';
+  const mapa = document.getElementById(`neighborhood-discovery-widget`);
+  mapa.style.display = 'none';
+
+  function showPaketi(){
+    paketi.style.display = 'block';
+    document.querySelector('#paketi').scrollIntoView({
+            behavior: 'smooth'
+  })
+}
+
+  function showKartice(){
+    const mapIframe = document.getElementById('map-iframe');
+        mapIframe.src = 'https://www.google.com/maps/d/u/0/embed?mid=1jFbxY3PZ4UmuyF_vmJsGeZLEGQzDT3c&ehbc=2E312F&noprof=1';
+    kartice.style.display = 'block';
+    mapa.style.display = 'block';
+    document.querySelector('#packages').scrollIntoView({
+            behavior: 'smooth'
+  })
+
+}
+
+
+
+function showCards(containerNumber) {
+  const mapIframe = document.getElementById('map-iframe');
+  mapIframe.src = 'https://www.google.com/maps/d/u/0/embed?mid=1jFbxY3PZ4UmuyF_vmJsGeZLEGQzDT3c&ehbc=2E312F&noprof=1';
+
+  for (let i = 1; i <= 4; i++) {
+    const container = document.getElementById(`cardContainer${i}`);
+    container.style.display = 'none';
+  }
+
+  const selectedContainer = document.getElementById(`cardContainer${containerNumber}`);
+
+  if (containerNumber === 1) {
+    mapIframe.src = 'https://www.google.com/maps/d/u/0/embed?mid=17RkzIXQU2g1dag8SEW-ZKTTY9vPO2W0&ehbc=2E312F&noprof=1';
+  } else if (containerNumber === 2) {
+    mapIframe.src = 'https://www.google.com/maps/d/embed?mid=1xRa7-bF1EOGo-89LVkUWY8KviLD--1M&ehbc=2E312F';
+  } else if (containerNumber === 3) {
+    mapIframe.src = 'https://www.google.com/maps/d/embed?mid=1SGKor-suE_8Y96pFMipp-SzdJ0ATrGg&ehbc=2E312F';
+  } else {
+    mapIframe.src = 'https://www.google.com/maps/d/embed?mid=1OdT2mvrnV2H6SEzP7YdpXABZ2VeYLBU&ehbc=2E312F';
+  }
+
+  selectedContainer.style.display = 'block';
+}
+</script>
+<script>
+  function showMapa(iframeSrc) { 
+    document.querySelector('#neighborhood-discovery-widget').scrollIntoView({
+      behavior: 'smooth',
+    
+    });
+    const mapIframe = document.getElementById('map-iframe');
+    const neighborhoodDiscoveryWidget = document.getElementById('neighborhood-discovery-widget');
+
+    mapIframe.src = iframeSrc;
+    neighborhoodDiscoveryWidget.style.display = 'block';
+ 
+    for (let i = 1; i <= 4; i++) {
+    const popup = document.getElementById(`popupOverlay-paket${i}`);
+    popup.style.display = 'none';
+  }
+
+  }
+ 
+</script>
+
+<div class="card-Container " id="cardContainer1">
+
+<br><br><br><br>
+    <section class="pricing">
+     
+        <h1 class="heading">  <span>Restorani</span> </h1>
+    
+        <div class="box-container">
+    
+            <div class="box" data-aos="zoom-in-up">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                      <div class="flip-card-front">
+                        <div class="image">
+                        <img src="images/ivoe.jpg" alt="">
+                        <h2>Ex Ponto Bar & Restaurant </h2>
+                      </div>
+                      <button id="flipButton" class="btn">Procitaj vise</button>
+                    </div>
+                      <div class="flip-card-back">
+                        <h1>Ex Ponto Bar & Restaurant </h1> 
+                        <h2>Odličan restoran sa odličnom uslugom. Osoblje je uvijek nasmijano i ljubazno. Hrana i ambijent su odlični. Uvek pravi izbor za svaku priliku.</h2> 
+                        <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flip-card">
+                    <div class="flip-card-inner">
+                      <div class="flip-card-front">
+                        <div class="image">
+                        <img src="images/kastel.jpg" alt="">
+                        <h2>Kastel na Hendeku</h2>
+                      </div>
+                      <button id="flipButton" class="btn">Procitaj vise</button>
+                    </div>
+                      <div class="flip-card-back">
+                        <h1>Kastel na Hendeku</h1> 
+                        <h2>Restoran Kastel na Hendeku već nekoliko godina svojim unikatnim ambijentom, ukusnom hranom i toplim gostoprimstvom privlači turiste iz svih krajeva svijeta. 
+                            U podnožju srednjovijekovne tvrđave Stari grad, naš restoran nudi širok
+                             asortiman jela i pića, koji će zadovoljiti ukuse i najzahtijevnijih 
+                             gostiju.</p>
+                             <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+                
+                
+            
+            
+            <div class="box" data-aos="zoom-in-up">
+                
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                      <div class="flip-card-front">
+                        <div class="image">
+                        <img src="images/hari5.jpg" alt="">
+                        <h2>Ćevabdžinica Hari
+                        </h2>
+                      </div>
+                      <button id="flipButton" class="btn">Procitaj vise</button>
+                    </div>
+                      <div class="flip-card-back">
+                        <h1>Ćevabdžinica Hari</h1> 
+                        <h2>Iako se svrstavaju pod isti naziv, uočljive su određene regionalne razlike u recepturi, ali i obliku i izgledu ćevapa u Bosni i Hercegovini, a travnički ćevap, pored svojstvenog mirisa i ukusa, također izdvaja i čini posebnim i prepoznatljiva “pitica”, koju na poseban način spravljaju travnički pekari.</p> 
+                        <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flip-card">
+                    <div class="flip-card-inner">
+                      <div class="flip-card-front">
+                        <div class="image">
+                        <img src="images/lutvo.jpg" alt="">
+                        <h2>Lutvina Kahva</h2>
+                      </div>
+                      <button id="flipButton" class="btn">Procitaj vise</button>
+                    </div>
+                      <div class="flip-card-back">
+                        <h1>Lutvina Kahva</h1> 
+                        <h1>Najzanimljivija lokacija na Plavoj vodi je Lutvina kahva. Upravo na ovom mjestu 1807. počinje, i sedam godina kasnije, završava radnja romana “Travnička hronika” nobelovca Ive Andrića. Bila je to skromna drvena kućica, gdje su se, kako se navodi u romanu, okupljali i sjedili travnički begovi, a tako je i kahva koja se danas pije na ovom mjestu postala “čuvena”.</p> 
+                        <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+    
+            <div class="box" data-aos="zoom-in-up">
+                
+            <div class="flip-card">
+                    <div class="flip-card-inner">
+                      <div class="flip-card-front">
+                        <div class="image">
+                        <img src="images/konak.jpg" alt="">
+                        <h2>Konak</h2>
+                      </div>
+                      <button id="flipButton" class="btn">Procitaj vise</button>
+                    </div>
+                      <div class="flip-card-back">
+                        <h1>Konak</h1> 
+                        <h1>nekadašnje je 
+                            rezidencijalno zdanje u Travniku. 
+                            Sagrađeno u vrijeme Osmanskog Carstv
+                             za potrebe sultanovih namjesnika u Travniku. 
+                             U to vrijeme je bilo sjedište vezira i uprave Bosanskog pašaluka.
+                            Danas je to jedan veliki restoran </p> 
+                        </h1></p>
+                        <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flip-card">
+                    <div class="flip-card-inner">
+                      <div class="flip-card-front">
+                        <div class="image">
+                        <img src="images/park.jpg" alt="">
+                        <h2>Doner Park</h2>
+                      </div>
+                      <button id="flipButton" class="btn">Procitaj vise</button>
+                    </div>
+                      <div class="flip-card-back">
+                        <h1>Doner Park</h1> 
+                        <h1>Doner Park je jedinstveno mjesto koje spaja uživanje u ukusnim zalogajima s opuštajućom atmosferom parka. Ovaj nevjerojatni prostor je stvoren s ciljem da pruži posetiocima jedinstveno iskustvo uživanja u popularnom jelu - döneru.
+
+                        </p> 
+                        <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                      </div>
+                    </div>
+                  </div>
+              
+        </div>
+       
+        </div>
+    
+    </section>
+    </div>
+ 
+    <div class="card-Container" id="cardContainer2">
+      <br><br><br><br>
+    <section class="pricing">
+    
+        <h1 class="heading">  <span>Vjerske ustanove</span> </h1>
+    
+        <div class="box-container">
+    
+            <div class="box" data-aos="zoom-in-up">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                      <div class="flip-card-front">
+                        <div class="image">
+                        <img src="images/sarena12.jpg" alt="">
+                        <h2>Sarena Dzamija</h2>
+                      </div>
+                      <button id="flipButton" class="btn">Procitaj vise</button>
+                    </div>
+                      <div class="flip-card-back">
+                        <h1>Sarena Dzamija</h1> 
+                        <h1>Šarena džamija ili Sulejmanija je džamija
+                             koja se nalazi se u Travniku, u dijelu nazvanom Donja čaršija,
+                              a pretpostavlja se da je izgrađena u drugoj polovini 16. vijeka.
+                               U vakufnami prvog obnovitelja džamije nalazi se podatak da ju je 
+                               izgradio Gazi-aga. 1757. godine vezir Ćamil Ahmed-aga podiže džamiju,
+                                koju su stanovnici mahale prozvali Ćamilija. Ona je izgorjela u požaru
+                                1815, a na njenom mjestu je novu džamiju podigao bosanski vezir Sulejman-
+
+                                paša Skopljak.</h1>
+                                <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                      </div>
+                    </div>
+                  </div>
+                <div class="box" data-aos="zoom-in-up">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                          <div class="flip-card-front">
+                            <div class="image">
+                            <img src="images/semin.jpg" alt="">
+                            <h2>Crkva Rođenja Blažene Djevice Marije</h2>
+                          </div>
+                          <button id="flipButton" class="btn">Procitaj vise</button>
+                        </div>
+                          <div class="flip-card-back">
+                            <h1>Crkva Rođenja Blažene Djevice Marije</h1> 
+                            <h1>Crkva rođenja Blažene Djevice Marije, poznata i kao Crkva Navještenja, posvećena je rođenju Blažene Djevice Marije. Ova crkva ima važno mjesto u kršćanskoj tradiciji, posebno u katoličkoj i pravoslavnoj vjeri. Neki vjernici vjeruju da je Blažena Djevica Marija rođena bez grijeha, po posebnoj milosti Božjoj, kako bi postala Majka Isusa Krista.</p>
+                            <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                          </div>
+                        </div>
+                      </div>
+                    
+    
+                </div>
+
+            </div>
+    
+            <div class="box" data-aos="zoom-in-up">
+                
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                      <div class="flip-card-front">
+                        <div class="image">
+                        <img src="images/varosd.jpg" alt="">
+                        <h2>Varoška džamija</h2>
+                      </div>
+                      <button id="flipButton" class="btn">Procitaj vise</button>
+                    </div>
+                      <div class="flip-card-back">
+                        <h1>Varoška džamija</h1> 
+                        <h1>Varoška džamija u Travniku ili Hadži-Hasanagina džamija, je jedna od najstarijih džamija izgrađenih u užoj jezgri grada Travnika, Bosna i Hercegovina, a pretpostavlja se da je nastala odmah nakon džamije u tvrđavi Stari grad
+
+                        </p>
+                        <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                      </div>
+                    </div>
+                  </div>
+                <div class="box" data-aos="zoom-in-up">
+                
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                          <div class="flip-card-front">
+                            <div class="image">
+                            <img src="images/sve je laz.jpg" alt="">
+                            <h2>Crkva Uspenja Presvete Bogorodice</h2>
+                          </div>
+                          <button id="flipButton" class="btn">Procitaj vise</button>
+                        </div>
+                          <div class="flip-card-back">
+                            <h1>Crkva Uspenja Presvete Bogorodice</h1> 
+                            <h1>rkva Uspenja Presvete Bogorodice je pravoslavna crkva u Travniku. Prva je pravoslavna crkva u gradskoj zoni Travnika.[1] Nalazi se nedaleko od mosta preko rijeke Lašve. Ne valja brkati ovu crkvu s rimokatoličkom crkvom Uznesenja Marijina u travničkom prigradskom naselju Dolcu, udaljenu jedva kojih pola kilometra zračne crte prema jugoistoku.</p>
+                            </p>
+                            <button id="flipButton1" class="btn1">Vrati Nazad
+                          </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+    
+            <div class="box" data-aos="zoom-in-up">
+                
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                      <div class="flip-card-front">
+                        <div class="image">
+                        <img src="images/sahatkula1.jpg" alt="">
+                        <h2>Hadži-Alibegova Džamija</h2>
+                      </div>
+                      <button id="flipButton" class="btn">Procitaj vise</button>
+                    </div>
+                      <div class="flip-card-back">
+                        <h1>Hadži-Alibegova Džamija</h1> 
+                        <h1>Hadži Ali-begova džamija u Travniku, ili džamija u Gornjoj čaršiji, ili džamija Mehmed-paše Kukavice, nalazi se u centru Travnika, Bosna i Hercegovina. Komisija za očuvanje nacionalnih spomenika na sjednici održanoj od 15. do 21. marta 2005. godine donijela je odluku da se Hadži Ali-begova džamija sa sahat-kulom, haremom i česmom proglasi za nacionalni spomenik Bosne i Hercegovine. </p>
+
+                        </p>
+                        <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                      </div>
+                    </div>
+                  </div>
+
+
+               <div class="box" data-aos="zoom-in-up">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                      <div class="flip-card-front">
+                        <div class="image">
+                        <img src="images/crkva16.jpg" alt="">
+                        <h2>Crkva sv. Ivana Krstitelja</h2>
+                      </div>
+                      <button id="flipButton" class="btn">Procitaj vise</button>
+                    </div>
+                      <div class="flip-card-back">
+                        <h1>Crkva sv. Ivana Krstitelja</h1> 
+                        <h1>Varoška džamija u Travniku ili Hadži-Hasanagina džamija, je jedna od najstarijih džamija izgrađenih u užoj jezgri grada Travnika, Bosna i Hercegovina, a pretpostavlja se da je nastala odmah nakon džamije u tvrđavi Stari grad
+
+                        </p>
+                        <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                      </div>
+                    </div>
+                  </div>
+               </div>
+    </section>
+    </div>
+    <div class="card-Container" id="cardContainer3">
+      <br><br><br><br>
+    <section class="pricing">
+    
+        <h1 class="heading">  <span>Kultura I Znamenitosti</span> </h1>
+    
+        <div class="box-container">
+    
+            <div class="box" data-aos="zoom-in-up">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <div class="image">
+                    <img src="images/stari3.jpg" alt="">
+                    <h2>Tvrdava Stari Grad</h2>
+                  </div>
+                  <button id="flipButton" class="btn">Procitaj vise</button>
+                </div>
+                  <div class="flip-card-back">
+                    <h1>Tvrdava Stari Grad</h1> 
+                    <p>Tvrđava Stari grad jedan je od najljepših i najočuvanijih fortifikacijskih objekata srednjovjekovne Bosne u kojem su naredni istorijski periodi ostavili svoja specifična obilježja.
+
+                      U do sada poznatim istoriografskim izvorima ne postoji podatak o godini i trajanju izgradnje, kao ni o graditelju. Historičari su saglasni da je tvrđava sagrađena u drugoj polovini 14. ili prvoj polovini 15. stoljeća. Po načinu gradnje i drugim indicijama pretpostavlja se da ju je dao sagraditi kralj Tvrtko II Kotromanić, ali historičari smatraju da je mogući graditelj i kralj Stjepan Dabiša.
+                    </h1>
+                    <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                  </div>
+                </div>
+              </div>
+                <div class="box" data-aos="zoom-in-up">
+                  <div class="flip-card">
+                    <div class="flip-card-inner">
+                      <div class="flip-card-front">
+                        <div class="image">
+                        <img src="images/muzej.jpg" alt="">
+                        <h2>Muzej Travnik</h2>
+                      </div>
+                      <button id="flipButton" class="btn">Procitaj vise</button>
+                    </div>
+                      <div class="flip-card-back">
+                        <h1>Muzej Travnik</h1> 
+                        <h1>Raznovrsnost zbirki i mnoštvo eksponata čine ga neizostavnim mjestom za upoznavanje prošlosti i prirodne baštine travničkog kraja. Stalna izložbena postavka, kao i tematske izložbe, predstavljaju istinsku atrakciju za domaće i inostrane turiste, školske ekskurzije i druge zaljubljenike u tradicionalnu kulturu i običaje svih ljudi i naroda koji od prahistorije naseljavaju ovaj dio BiH.
+                          <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+    
+            <div class="box" data-aos="zoom-in-up">
+                
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <div class="image">
+                    <img src="images/ivo.jpg" alt="">
+                    <h2>Kuca Ive Andrića</h2>
+                  </div>
+                  <button id="flipButton" class="btn">Procitaj vise</button>
+                </div>
+                  <div class="flip-card-back">
+                    <h1>Kuca Ive Andrića</h1> 
+                    <h1>Stalna izložbena postavka predstavlja život i literaturu Ive Andrića, i sastoji se od : Rodne sobe, sobe posvećene romanu “Travnička hronika”, Fototeke sa fotografijama sa dodjele Nobelove nagrade, Biblioteke sa umjetničkom zbirkom.
+
+                      Memorijalni muzej kontinuirano prikuplja građu i eksponate koji mogu biti relevantni za život i literaturu Ive Andrića. Svake godine priređuju se književni i kulturni programi kojima se javnost želi podsjetiti na najvažnije datume i događaje iz Andrićevog života i književne karijere.
+                      <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                    </div>
+                </div>
+              </div>
+                <div class="box" data-aos="zoom-in-up">
+                
+                  <div class="flip-card">
+                    <div class="flip-card-inner">
+                      <div class="flip-card-front">
+                        <div class="image">
+                        <img src="images/vozasrecu.jpg" alt="">
+                        <h2>Parni Voz Ćiro</h2>
+                      </div>
+                      <button id="flipButton" class="btn">Procitaj vise</button>
+                    </div>
+                      <div class="flip-card-back">
+                        <h1>Parni Voz Ćiro</h1> 
+                        <h1>Da bi se sačuvala uspomena na nekadašnji željeznički promet u ovome dijelu zemlje koji je pratio i razvoj industrijskih kapaciteta i veći promet putnika i robe, Direkcija željeznica Bosne i Hercegovine je nakon ukidanja uskotračne pruge 1975. godine ostavila na brigu Općini Travnik parni voz “Ćiru” koji se sastoji od lokomotive i dva vagona.
+                          <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+    
+            <div class="box" data-aos="zoom-in-up">
+                
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <div class="image">
+                    <img src="images/plava.jpg" alt="">
+                    <h2>Plava Voda</h2>
+                  </div>
+                  <button id="flipButton" class="btn">Procitaj vise</button>
+                </div>
+                  <div class="flip-card-back">
+                    <h1>Plava Voda</h1> 
+                    <h1> Plava voda je nacionalni spomenik u Travniku, Bosna i Hercegovina. Čine ga mezarje na Derventi sa turbetom travničkog muftije Mehmed efendije i njegove supruge Ajiše i objekat Lutvine (Rudolfove) kahve.
+
+                      Nalazi se u naselju Šumeće u kojem izvire Plava voda, koja se uz potok Hendek ulijeva u rijeku Lašvu.
+                      <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                    </div>
+                </div>
+              </div>
+                <div class="box" data-aos="zoom-in-up">
+                
+                  <div class="flip-card">
+                    <div class="flip-card-inner">
+                      <div class="flip-card-front">
+                        <div class="image">
+                        <img src="images/kulaodstakla2.jpg" alt="">
+                        <h2>Sahat Kula</h2>
+                      </div>
+                      <button id="flipButton" class="btn">Procitaj vise</button>
+                    </div>
+                      <div class="flip-card-back">
+                        <h1>Sahat Kula</h1> 
+                        <h1>Travnik je jedini grad u Bosni i Hercegovini koji ima dvije sahat-kule: Sahat-kula na Musali, koja se nalazi u donjoj čaršiji, prirodnoj zaravni ispod Starog grada Travnika i Sahat kula u gornjem gradu.
+                          <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+    
+        </div>
+    
+    </section>
+    </div>
+    <div class="card-Container" id="cardContainer4">
+      <br><br><br><br>
+    <section class="pricing">
+    
+        <h1 class="heading">  Sportsko Rekreacioni<span> Centri</span> </h1>
+    
+        <div class="box-container">
+    
+            <div class="box" data-aos="fade-up">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <div class="image">
+                    <img src="images/halakteorema.jpg" alt="">
+                    <h2>Sport Centar Fara</h2>
+                  </div>
+                  <button id="flipButton" class="btn">Procitaj vise</button>
+                </div>
+                  <div class="flip-card-back">
+                    <h1>Sport Centar Fara</h1> 
+                    <h1>  U fitness centru naći ćete kompletnu fitness uslugu koja će zadovoljiti zahtjeve kako vrhunskih sportaša, tako i početnika – rekreativaca.
+                    Aerobik sala će omogućiti svakoj ženi/djevojci sve potrebno za održavanje tjelesne forme i kondicije.
+                    Kafeterija Sport Centar FARA pružit će svim korisnicima naših usluga ugodnu atmosferu sa pogledom na malonogometni teren.</p>
+                      <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                    </div>
+                </div>
+              </div>
+                <div class="box" data-aos="fade-up">
+                    <div class="flip-card">
+                      <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                          <div class="image">
+                          <img src="images/paintball.jpg" alt="">
+                          <h2>Mogucnost Igranja Paintballa(Vlasic)</h2>
+                        </div>
+                        <button id="flipButton" class="btn">Procitaj vise</button>
+                      </div>
+                        <div class="flip-card-back">
+                          <h1>Mogucnost Igranja Paintballa(Vlasic)</h1> 
+                          <h1>Naša paintball arena smeštena je usred prirode, visoko među planinskim vrhovima gde se susreću avantura i uzbuđenje. Dok se penjete stazama oko našeg poligona, osetićete miris svežeg planinskog vazduha i uzbuđenje koje se nadvija u atmosferi.   </p>
+                            <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box" data-aos="zoom-in-up">
+                
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <div class="image">
+                    <img src="images/majvej.jpg" alt="">
+                    <h2>Fitness Centar MY-Way</h2>
+                  </div>
+                  <button id="flipButton" class="btn">Procitaj vise</button>
+                </div>
+                  <div class="flip-card-back">
+                    <h1>Fitness Centar MY-Way</h1> 
+                    <h1>Uđite u svet gde su granice samo izazovi koje treba prevazići, gde snaga tela i uma postaju jedno. "My Way" je vaša destinacija za ispunjenje fitness ciljeva, bilo da želite izgraditi mišiće, izgubiti težinu ili jednostavno ojačati svoje srce i dušu. </p>
+                      Nalazi se u naselju Šumeće u kojem izvire Plava voda, koja se uz potok Hendek ulijeva u rijeku Lašvu.
+                      <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                    </div>
+                </div>
+              </div>
+                <div class="box" data-aos="zoom-in-up">
+                
+                  <div class="flip-card">
+                    <div class="flip-card-inner">
+                      <div class="flip-card-front">
+                        <div class="image">
+                        <img src="images/kvadovi1.jpg" alt="">
+                        <h2>Mogucnost Rentanja Quadova (Vlasic)</h2>
+                      </div>
+                      <button id="flipButton" class="btn">Procitaj vise</button>
+                    </div>
+                      <div class="flip-card-back">
+                        <h1>Mogucnost Rentanja Quadova (Vlasic)</h1> 
+                        <h1>Naši kvadovi su savremeni, dobro održavani i prilagođeni svim nivoima iskustva. Bez obzira da li ste vozač po prvi put ili iskusni ljubitelj off-road vožnje, naši kvadovi će vam pružiti sigurnost i performanse koje tražite. Opremljeni smo različitim modelima kvadova kako bismo zadovoljili različite preferencije i potrebe naših klijenata.</p>
+                          <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="box" data-aos="zoom-in-up">
+              <div class="flip-card">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <div class="image">
+                  <img src="images/sunce2.jpg" alt="">
+                  <h2>Hotel Sunce Vlasic</h2>
+                </div>
+                <button id="flipButton" class="btn">Procitaj vise</button>
+              </div>
+                <div class="flip-card-back">
+                  <h1>Hotel Sunce Vlasic</h1> 
+                  <h1>Za one koji žude za aktivan odmor, naša vrhunska teretana opremljena najmodernijim spravama čeka vas da izazovete svoje granice. Bez obzira na to da li ste profesionalni sportista ili tek početnik u svetu fitnesa, naši stručni treneri su tu da vam pruže podršku i inspiraciju. Posle treninga, opustite se u našem wellness centru, gde vas čeka sauna i bazen, stvoren da obnavlja vaše telo i dušu. </p>
+                    <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                  </div>
+
+              </div>
+            </div>
+                <div class="box" data-aos="zoom-in-up">
+                
+                  <div class="flip-card">
+                    <div class="flip-card-inner">
+                      <div class="flip-card-front">
+                        <div class="image">
+                        <img src="images/skijanje.jpg" alt="">
+                        <h2>Mogucnost skijanje tokom zimske sezone</h2>
+                      </div>
+                      <button id="flipButton" class="btn">Procitaj vise</button>
+                    </div>
+                      <div class="flip-card-back">
+                        <h1>Mogucnost skijanje tokom zimske sezone</h1> 
+                        <h1>Svake godine, kada zimska sezona stigne, naša planina postaje igralište za ljubitelje skijanja svih nivoa veština. Naši uređeni stazi pružaju savršenu ravnotežu između izazova i uživanja, sa panoramskim pogledima koji oduzimaju dah dok klizite niz padine. Bez obzira da li ste iskusni skijaš ili tek početnik, naša škola skijanja i instruktori su tu da vam pomognu da uživate u svakom trenutku na snijegu.</p>
+                          <button id="flipButton1" class="btn1">Vrati Nazad</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+    
+        </div>
+    
+    </section>
+
+
+  
+</style>
+</div>
+
+
+<div id="neighborhood-discovery-widget">
+    <div class="iframe-container">
+      <iframe id="map-iframe" src="https://www.google.com/maps/d/u/0/embed?mid=1jFbxY3PZ4UmuyF_vmJsGeZLEGQzDT3c&ehbc=2E312F&noprof=1" width="100%" loading="lazy"></iframe> 
+    </div>
+</div>
+<script>
+  // Get the iframe element
+  var mapIframe = document.getElementById("map-iframe");
+
+  // Ask for permission to access the user's location
+  if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+          function(position) {
+              // On success, update the iframe source with the user's location
+              var latitude = position.coords.latitude;
+              var longitude = position.coords.longitude;
+              
+              // Update the source URL of the iframe with the user's coordinates
+              mapIframe.src = "https://www.google.com/maps/d/u/0/embed?mid=1jFbxY3PZ4UmuyF_vmJsGeZLEGQzDT3c&ehbc=2E312F&noprof=1&ll=" + latitude + "," + longitude;
+          },
+          function(error) {
+              console.error("Error getting user location:", error.message);
+          }
+      );
+  } else {
+      console.error("Geolocation is not supported by this browser.");
+  }
+</script>
+<a href="#packages" style="text-decoration: none; color: #eee; font-size: 20px; font-weight: bold;" onclick="showKartice()">
+<button class="btn" style="display: block;margin-left: auto;margin-right: auto; width: 150px;height:75px;">
+  Nazad</a></button>
+
+  <br><br><br>
+
+
+<section class="review" id="review">
+
+    <h1 class="heading"> Poznati  Događaji </h1>
+    <br>
+    <br><br><br>
+
+    <div class="swiper-container review-slider" data-aos="zoom-in">
+
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide slide">
+                <img src="images/ivo2.jpg" alt="">
+                <h3>Andrićevi Dani</h3>
+                <p>Od 9. oktobra do 9. novembra u Travniku će se 
+                    održati kulturna manifestacija “Andrićevi dani ” 
+                    posvećena nobelovcu Ivi Andriću. Tokom mjesec dana kulturne
+                     i obrazovne institucije iz Travnika pripremile su brojne sadržaje, od promocija knjiga, preko pozorišnih predstava, izložbi do koncerata.
+                </p>
+                <input type="submit" value="Prikazi vise" class="btn">
+            </div>
+
+            <div class="swiper-slide slide">
+                <img src="images/rebot.jpg" alt="">
+                <h3>IT REBOOT</h3>
+                <p>IT Reboot je prvi sajam informacijskih tehnologija ovog tipa
+                     u Bosni i Hercegovini, organizovan s ciljem kreiranja preduslova za razvoj IT industrije u BiH, posebno u Travniku i Centralnoj Bosni.
+                Organizovanjem sajma općina Travnik je napravila ogroman
+                 iskorak u kreiranju podsticajnog okruženja za IT kompanije  i poduzetnike u Travniku, posebno za mlade koji su potencijal za IT industriju.
+                 
+                 
+                </p>
+                <input type="submit" value="Prikazi vise" class="btn">
+            </div>
+            
+
+            <div class="swiper-slide slide">
+                <img src="images/utrka.jpg" alt="">
+                <h3>Noćna Utrka</h3>
+                <p>Noćna utrka na travniku pruža jedinstvenu priliku za 
+                    trkače da iskuse prirodu na sasvim drugačiji način,
+                     donoseći osjećaj čarobnosti u svijet trčanja i povezivanja 
+                     s prirodnom okolinom na jedinstven način.Noćna utrka na travniku može
+                      biti jedno nevjerojatno iskustvo, koje dodaje dodatnu
+                       dimenziju trčanju jer se trči korz ulice grada.
+                    </p>
+                <input type="submit" value="Prikazi vise" class="btn">
+            </div>
+
+            <div class="swiper-slide slide">    
+                <img src="images/opcina2.jpg" alt="">
+                <h3>Dani Dijaspore</h3>
+                <p>Od 1.Augusta do 5.Augusta održava se  manifestacija ”Dani dijaspore”.
+                    Ovo izdanje ove manifestacije ponovo u naš grad donosi nekoliko kvalitetnih kulturnih dešavanja<br>
+                    Neki od njih su :Promocija knjiga ,Koncetri Velikih Zvijezda, sportski događaji...
+
+                </p>
+                <input type="submit" value="Prikazi vise" class="btn">
+            </div>
+            <div class="swiper-slide slide">
+              <img src="images/jaja.jpg" alt="">
+              <h3>Čimburijada u Travniku</h3>
+              <p> Kajganijada ili čimburijada u Travniku, običaj je koji ostaje trajno upakovan u najljepša sjećanja djetinstva, čak i onih sugrađana poodmakle životne dobi.
+                Zato Travničani Kajganijadu vide kao dragog gosta, prigrle taj prvi proljetni dan kao nagovještaj dolaska tako željenog sunca i toplih dana, a upravo jedan takav upotpunio je osjećaj izletničkog zadovoljstva.
+              </p>
+              <input type="submit" value="Prikazi vise" class="btn">
+          </div>
+
+        </div>
+
+        <div class="swiper-pagination"></div>
+
+    </div></section>
+
+
+
+
+</section>
+<div id="ratingModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeRatingModal()">&times;</span>
+        <div class="stars" id="stars">
+            <img src="images/outline.png" class="star" data-index="1" onclick="rate(1)">
+            <img src="images/outline.png" class="star" data-index="2" onclick="rate(2)">
+            <img src="images/outline.png" class="star" data-index="3" onclick="rate(3)">
+            <img src="images/outline.png" class="star" data-index="4" onclick="rate(4)">
+            <img src="images/outline.png" class="star" data-index="5" onclick="rate(5)">
+        </div>
+        <textarea id="comment" class="comment" placeholder="Ostavi komentar"></textarea>
+        <button onclick="submitRating()" id="submitBtn "class="dugmeocjene">Potvrdi ocjenu</button>
+    </div>
+</div>
+<section class="contact" id="contact">
+
+  <h1 class="heading"> <span>Kontaktiraj </span> nas </h1>
+
+  <form action="php\process_form.php" data-aos="zoom" method="" onsubmit="submitForm(event)" id="myForm">
+
+      <div class="inputBox">
+          <input type="text" placeholder="Ime" data-aos="fade-up" name="ime">
+          <input type="email" placeholder="Gmail" data-aos="fade-up" name="gmail">
+      </div>
+
+      <div class="inputBox">
+          <input type="number" placeholder="Broj-telefona" data-aos="fade-up" name="broj_telefona">
+          <input type="text" placeholder="Problem" data-aos="fade-up" name="problem">
+          <input name="objasnjenje_problema" placeholder="Objašnjenje problema" id="" cols="30" rows="10" data-aos="fade-up"></input>
+      </div>
+
+      
+      
+      <input type="submit" value="Posalji poruku" class="btn-ocjena">
+      <a onclick="openRatingModal()" class="btn">Dodaj Ocjenu</a>
+  </form>
+
+</section>
+
+
+
+
+<section class="footer">
+
+    <div class="box-container">
+
+        
+
+      
+
+        <div class="box" data-aos="fade-up">
+            <h3>Kontakt info</h3>
+            <a href=""> <i class="fas fa-phone"></i> +387603281916 </a>
+            <a href=""> <i class="fas fa-phone"></i> +387603436498 </a>
+           
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Travnik,Bosna i Hercegovina </a>
+        </div>
+
+        <div class="box" data-aos="fade-up">
+            <h3>Zapratite nas</h3>
+            <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
+            <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
+            
+        </div>
+
+    </div>
+
+    <div class="credit">Sva prava zadržana  <span></span> VisiTra</div>
+
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="js/script.js"></script>
+
+<script>
+
+AOS.init({
+    duration:800,
+    delay:400
+});
+
+function openPopup() {
+        document.getElementById('popupOverlay').style.display = 'flex';
+    }
+    function closePopup() {
+        document.getElementById('popupOverlay').style.display = 'none';
+        resetForm();
+    }
+
+    /////////////////////paketi
+    function openPopupPaket1() {
+        document.getElementById('popupOverlay-paket1').style.display = 'flex';
+    }
+    function closePopupPaket1() {
+
+        document.getElementById('popupOverlay-paket1').style.display = 'none';
+        
+        
+    }
+    function kartce(){
+      kartice.style.display = 'block';
+    document.querySelector('#packages').scrollIntoView({
+            behavior: 'smooth'
+  })
+    }
+    function openPopupPaket2() {
+        document.getElementById('popupOverlay-paket2').style.display = 'flex';
+    }
+    function closePopupPaket2() {
+
+        document.getElementById('popupOverlay-paket2').style.display = 'none';
+        
+        
+    }
+    function openPopupPaket3() {
+        document.getElementById('popupOverlay-paket3').style.display = 'flex';
+    }
+    function closePopupPaket3() {
+
+        document.getElementById('popupOverlay-paket3').style.display = 'none';
+       
+        
+    }
+    function openPopupPaket4() {
+        document.getElementById('popupOverlay-paket4').style.display = 'flex';
+    }
+    function closePopupPaket4() {
+
+        document.getElementById('popupOverlay-paket4').style.display = 'none';
+       
+        
+    }
+    /////////////////kraj paketa
+
+
+    // Ovdje možete dodati JavaScript za obradu forme (npr. AJAX poziv)
+    document.getElementById('popupForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        // Dodajte svoju logiku za obradu forme ovdje
+        closePopup();
+    });
+    function resetForm() {
+        document.getElementById('popupForm').reset();
+    }
+
+    function submitForm(event) {
+        // Spriječi automatsko podnošenje obrasca
+        event.preventDefault();
+        clearForm();
+    }
+    function clearForm() {
+        var inputElements = document.querySelectorAll('#myForm input');
+
+        inputElements.forEach(function (element) {
+            if(element.value =='Posalji poruku'){
+                return;
+            }
+            else{
+            element.value = '';
+            }
+        });
+    }
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                // The request was successful, you can process the response here if needed
+                console.log('posjete.php was loaded successfully');
+            } else {
+                // There was an error loading posjete.php
+                console.error('Error loading posjete.php');
+            }
+        }
+    }
+
+    xhr.open('GET', 'http://localhost/najnobija/admin-panel/posjete.php', true);
+    xhr.send();
+});
+</script>
+
+
+<!--Faris modali-->
+<script>
+  function openModal1() {
+    document.getElementById('myModal1').style.display = 'block';
+  }
+
+  function closeModal1() {
+    document.getElementById('myModal1').style.display = 'none';
+  }
+
+  // Close modal if clicked outside the modal content
+  window.addEventListener('click', function (event) {
+    var modal = document.getElementById('myModal1');
+    var closeButton = document.getElementById('closeModalBtn');
+
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+
+    if (event.target === closeButton) {
+      modal.style.display = 'none';
+    }
+  });
+</script>
+<script>
+  function openModal6() {
+    document.getElementById('myModal6').style.display = 'block';
+  }
+
+  function closeModal6() {
+    document.getElementById('myModal6').style.display = 'none';
+  }
+
+  // Close modal if clicked outside the modal content
+  window.addEventListener('click', function (event) {
+    var modal = document.getElementById('myModal6');
+    var closeButton = document.getElementById('closeModalBtn');
+
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+
+    if (event.target === closeButton) {
+      modal.style.display = 'none';
+    }
+  });
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script>
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      { pageLanguage: 'eng' },
+      'google_translate_element'
+    );
+  }
+</script>
+</body>
+</html>
