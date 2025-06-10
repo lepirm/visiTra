@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO problemi (Ime, Email, Broj_telefona, Problem, Objasnjenje) VALUES ('$ime', '$gmail', '$broj_telefona', '$problem', '$objasnjenje_problema')";
 
     if ($conn->query($sql) === TRUE) {
-        header("Location: http://localhost/visitra/visitra.html");
+        header("Location: http://localhost/visitra/index.html");
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
