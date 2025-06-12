@@ -55,11 +55,7 @@
   </script> 
 
 <style>
-  .body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
+
     .event-image {
     width: 120px; 
     height: 120px; 
@@ -126,6 +122,8 @@
     left: 0;
     width: 100%;
     height: 100%;
+    margin: auto;
+    
     background: rgba(0, 0, 0, 0.5);
     align-items: center;
     justify-content: center;
@@ -139,6 +137,7 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     text-align: center;
+   
 }
 
 .form-row {
@@ -326,6 +325,7 @@ font-size: 20px;
 cursor: pointer;
 z-index: 1100; 
 color: #379683;
+
 }
 .logo {
   max-width: 90px;
@@ -336,10 +336,15 @@ color: #379683;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
+  width: 100%;
+  
 }
 .logo2{
   width:100%;
   height: 70%;
+}
+.visitra-btn{
+  width: 40%;
 }
 </style>
 <link rel="icon" href="images/it.reboot.png" type="image/x-icon">
@@ -350,24 +355,19 @@ color: #379683;
 
 
 <header class="header">
-  <a href="index.html">
+  <a href="index.html" class="visitra-btn">
   <div class="logo1"> 
-     <img src="images/it.reboot.png" alt="Logo" class="logo" style="margin-bottom: 3%;max-height: 80px;">
+    
      <img src="images/VisiTra.png" alt="Logo" class="logo2" style="max-width: 200px;margin-bottom:5%">
   </div>
 </a>
    
   
-
-
-  <div id="prevod" class="clicked" onclick="prikaziDiv()">
-    <img id="translateImage" src="images/translate1.png" alt="Translate Image">
-    <img id="secondImage" src="images/translate2.png" alt="Second Image">
-    
-</div>
-    <div id="google_translate_element" class="transvertit">
-    <!-- Vaš sadržaj div-a ovdje -->
-</div>
+<div class="navbar2">
+    <div id="prevod" class="clicked" onclick="prikaziDiv()">
+    <div id="translateImage"  alt="Translate Image"></div>
+    </div>
+    <div id="google_translate_element" class="transvertit"></div>
 
 
     <div class="icons">
@@ -377,18 +377,9 @@ color: #379683;
         <div class="fa fa-calendar" id="theme-btn"  button onclick="openModal()"></button></div> 
         
         <div class="fas fa-user" id="login-btn"></div>
-        <div class="fas fa-bars" id="menu-btn"></div>
-    </div>
 
-    <nav class="navbar">
-        <a href="#home">Počenta</a>
-        <a href="#packages">Sta želite posjetiti</a>
-        <a href="#review">Poznati događaji</a>
-        <a href="#contact">Kontakt</a>
-        
-    </nav>
-
-    <form action="php\login.php" class="login-form" method="post">
+  
+     <form action="php\login.php" class="login-form" method="post">
 
       <div class="inputBox">
           <span>Korisničko ime</span>
@@ -403,8 +394,8 @@ color: #379683;
       <input type="submit" class="btn" value="Prijava">
 
   </form>
-
-
+</div>
+</div>
 </header>
 <div id="myModal" class="modal2">
     <div class="modal2-content">
@@ -509,7 +500,7 @@ color: #379683;
     </section>
     
     <div class="overlay" id="popupOverlay-paket1">
-        <div class="popup">
+        <div class="popupM">
             <h1>Porodicni paket</h1>
             <p style="font-size: small; text-align: left;"> Dobrodošli u Travnik, jedan od najljepših gradova Bosne i Hercegovine!<br>
                 Ovaj šarmantni grad nudi raznolike mogućnosti za porodična iskustva, bilo da uživate u gastronomiji,<br>
@@ -530,11 +521,12 @@ color: #379683;
                 <h3 style="text-align: left;">Muzej Travnik:</h3><p style="font-size: small; text-align: left;">Upoznajte se s bogatom historijom grada kroz posjetu muzeju. Interaktivni izložbeni prostori posebno su zanimljivi za djecu.</p></p></p>
                 
                 <div class="image-container-paket">
-                <img src="images\stari3.jpg" alt="Slika 1" style="height: 160px; width: 160px;">
-                <img src="images\muzej.jpg" alt="Slika 2" style="height: 160px; width: 160px;">
-                <img src="images\plava.jpg" alt="Slika 1" style="height: 160px; width: 160px;">
+                 <img src="images\stari3.jpg"  alt="Slika 1" >
+                 <img src="images\muzej.jpg" alt="Slika 2" >
+                 <img src="images\plava.jpg" alt="Slika 1" >
+                </div>
                 <!-- Dodajte više slika ako je potrebno -->
-            </div>
+               
             <div class="form-group1">
                 <input type="submit" value="Izaberi ovaj paket" onclick="showMapa('https:\/\/www.google.com\/maps\/d\/embed?mid=1NRQ7ECWKxYBowEprtnb_yM5Qjo8n0VE&ehbc=2E312F')" id="paket1">
               </div>
@@ -542,7 +534,7 @@ color: #379683;
         </div>
     </div>
     <div class="overlay" id="popupOverlay-paket2">
-        <div class="popup">
+        <div class="popupM">
             <h1>Sportski paket</h1>
             <p style="font-size: small; text-align: left;"> Dobrodošli u Travnik, grad koji nudi raznovrsne sportske aktivnosti za sve ljubitelje sporta!<br>
                 Bez obzira jeste li zaljubljenik u aktivnosti na otvorenom ili preferirate sportske dvorane, Travnik ima mnogo toga za ponuditi.<br>
@@ -558,9 +550,9 @@ color: #379683;
                 Ovo je sjajan način za aktivno provođenje vremena zajedno.</p><br>
         
                 <div class="image-container-paket">
-                <img src="images\majvej.jpg" alt="Slika 1" style="height: 160px; width: 160px;">
-                <img src="images\vlasic.jpg" alt="Slika 2" style="height: 160px; width: 160px;">
-                <img src="images\halakteorema.jpg" alt="Slika 1" style="height: 160px; width: 160px;">
+                <img src="images\majvej.jpg" alt="Slika 1"">
+                <img src="images\vlasic.jpg" alt="Slika 2"">
+                <img src="images\halakteorema.jpg" alt="Slika 1"">
                 <!-- Dodajte više slika ako je potrebno -->
             </div>
             <div class="form-group1">
@@ -570,7 +562,7 @@ color: #379683;
         </div>
     </div>
     <div class="overlay" id="popupOverlay-paket3">
-        <div class="popup">
+        <div class="popupM">
             <h1>Kulturno obrazovni</h1>
             <p style="font-size: small; text-align: left;">Dobrodošli u Travnik, grad bogate kulturne baštine i obrazovnih doživljaja!<br>
                 Bez obzira na vaše interese, ovaj grad ima mnogo toga za ponuditi kada su u pitanju kulturno-obrazovne aktivnosti.<br>
@@ -591,9 +583,9 @@ color: #379683;
                 </p></p></p>
                 
                 <div class="image-container-paket">
-                <img src="images\kulaodstakla.jpg" alt="Slika 1" style="height: 160px; width: 160px;">
-                <img src="images\konji.jpg" alt="Slika 2" style="height: 160px; width: 160px;">
-                <img src="images\muzej.jpg" alt="Slika 1" style="height: 160px; width: 160px;">
+                <img src="images\kulaodstakla.jpg" alt="Slika 1"">
+                <img src="images\konji.jpg" alt="Slika 2"">
+                <img src="images\muzej.jpg" alt="Slika 1"">
                 <!-- Dodajte više slika ako je potrebno -->
             </div>
             <div class="form-group1">
@@ -604,7 +596,7 @@ color: #379683;
         </div>
     </div>
     <div class="overlay" id="popupOverlay-paket4">
-        <div class="popup">
+        <div class="popupM">
             <h1>Zimski paket</h1>
             <p style="font-size: small; text-align: left;"> Dobrodošli u zimsku čaroliju grada Travnik! Ovaj grad nudi raznovrsne aktivnosti koje možete uživati tokom hladnih zimskih mjeseci.<br>
                 Bez obzira jeste li ljubitelj zimskih sportova, kulinarskih užitaka ili kulturnih doživljaja, Travnik ima nešto za svakoga.<br>
@@ -628,9 +620,9 @@ color: #379683;
                 </p>
                 
                 <div class="image-container-paket">
-                <img src="images\zima.jpg" alt="Slika 1" style="height: 160px; width: 160px;">
-                <img src="images\skijanje.jpg" alt="Slika 2" style="height: 160px; width: 160px;">
-                <img src="images\sankanje.jpg" alt="Slika 1" style="height: 160px; width: 160px;">
+                <img src="images\zima.jpg" alt="Slika 1"">
+                <img src="images\skijanje.jpg" alt="Slika 2"">
+                <img src="images\sankanje.jpg" alt="Slika 1"">
                 <!-- Dodajte više slika ako je potrebno -->
             </div>
             <div class="form-group1">
@@ -1723,7 +1715,7 @@ function showCards(containerNumber) {
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="js/script.js"></script>
+<script src="./js/script.js"></script>
 
 <script>
 
